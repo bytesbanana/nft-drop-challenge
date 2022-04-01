@@ -1,23 +1,28 @@
-# Next.js + Tailwind CSS Example
+# NFT Drop challenge
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+A example NFT Marketplace web3 application, built with Next.js, TailwindCSS and ThirdWeb.
 
-## Deploy your own
+## Status
+This project is currently in development. 
+Now user can only logged in with metamask on Rinkby testnet.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+![Screen Capture](https://raw.githubusercontent.com/bytesbanana/nft-drop-challenge/main/screen-capture.png)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+# Running this project
+1. Clone this repository and change working directory
 
-## How to use
+``git clone https://github.com/bytesbanana/nft-drop-challenge.git``
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+``cd ./nft-drop-challenge``
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
-```
+2. Install dependency
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+``npm install``
+
+3. Start dev server
+
+``npm run dev``
+
+4. To Visit Application
+
+`go to localhost:3000`
