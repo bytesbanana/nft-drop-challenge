@@ -1,10 +1,20 @@
-import React from 'react'
 import { useAddress, useDisconnect, useMetamask } from '@thirdweb-dev/react'
+import { CollectionAPI } from 'lib/api'
+import { GetServerSideProps, NextPageContext } from 'next'
+import Link from 'next/link'
+import { urlFor } from 'sanityClient'
+import { Collection } from 'tyings'
 
-const NFTDropPage = (props: any) => {
+interface Props {
+  collection: Collection
+}
+
+const NFTDropPage = ({ collection }: Props) => {
   const connectWithMetamask = useMetamask()
   const address: string | undefined = useAddress()
   const disconect = useDisconnect()
+
+  console.log(collection)
 
   const markAddress = () => {
     return (
@@ -21,16 +31,16 @@ const NFTDropPage = (props: any) => {
         <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen">
           <div className="p-2 bg-gradient-to-br from-yellow-400 to-purple-600">
             <img
-              src="https://links.papareact.com/8sg"
+              src={urlFor(collection.previewImage).url()}
               alt="hero-pic"
               className="object-cover w-44 rounded-xl lg:h-96 lg:w-72"
             />
           </div>
           <div className="p-5 space-y-2 text-center">
-            <h1 className="text-4xl font-bold text-white">SomeNFT Apes</h1>
-            <h2 className="text-xl text-gray-300">
-              A collection of SomeNFT Apes who live & breathe React!
-            </h2>
+            <h1 className="text-4xl font-bold text-white">
+              {collection.nftCollectionName}
+            </h1>
+            <h2 className="text-xl text-gray-300">{collection.description}</h2>
           </div>
         </div>
       </div>
@@ -38,13 +48,15 @@ const NFTDropPage = (props: any) => {
       <div className="flex flex-col flex-1 p-12 lg:col-span-6">
         {/* Header */}
         <header className="flex items-center justify-between ">
-          <h1 className="text-xl cursor-pointer w-52 font-extralight sm:w-80">
-            The{' '}
-            <span className="font-extrabold underline decoration-pink-600/50">
-              SomeNFT
-            </span>{' '}
-            NFT Market Place
-          </h1>
+          <Link href="/">
+            <h1 className="text-xl cursor-pointer w-52 font-extralight sm:w-80">
+              The{' '}
+              <span className="font-extrabold underline decoration-pink-600/50">
+                NFT Drop
+              </span>{' '}
+              Market Place
+            </h1>
+          </Link>
 
           <button
             onClick={() => (address ? disconect() : connectWithMetamask())}
@@ -62,12 +74,12 @@ const NFTDropPage = (props: any) => {
         {/* Content */}
         <div className="flex flex-col items-center flex-1 mt-10 space-y-6 text-center lg:justify-center lg:space-y-0">
           <img
-            src="https://links.papareact.com/bdy"
+            src={urlFor(collection.mainImage).url()}
             className="object-cover pb-10 w-80 lg:h-40"
             alt=""
           />
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
-            The SomeNFT Ape Coding Club | NFT Drop
+            {collection.title}
           </h1>
           <p className="pt-2 text-xl text-green-500"> 13/21 NFT's claimed</p>
         </div>
@@ -82,3 +94,13 @@ const NFTDropPage = (props: any) => {
 }
 
 export default NFTDropPage
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const collection = await CollectionAPI.findCollectionBySlug(params?.slug)
+
+  return {
+    props: {
+      collection,
+    },
+  }
+}
