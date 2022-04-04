@@ -251,7 +251,7 @@
     "@ethersproject/logger" "^5.6.0"
     bn.js "^4.11.9"
 
-"@ethersproject/bytes@5.6.1", "@ethersproject/bytes@^5.6.0":
+"@ethersproject/bytes@5.6.1", "@ethersproject/bytes@^5.6.0", "@ethersproject/bytes@^5.6.1":
   version "5.6.1"
   resolved "https://registry.npmjs.org/@ethersproject/bytes/-/bytes-5.6.1.tgz"
   integrity sha512-NwQt7cKn5+ZE4uDn+X5RAXLp46E1chXoaMmrxAyA0rblpxz8t58lVkrHXoRIn0lz1joQElQ8410GqhTqMOwc6g==
@@ -265,9 +265,9 @@
   dependencies:
     "@ethersproject/bignumber" "^5.6.0"
 
-"@ethersproject/contracts@5.6.0":
+"@ethersproject/contracts@5.6.0", "@ethersproject/contracts@^5.6.0":
   version "5.6.0"
-  resolved "https://registry.npmjs.org/@ethersproject/contracts/-/contracts-5.6.0.tgz"
+  resolved "https://registry.npmjs.org/@ethersproject/contracts/-/contracts-5.6.0.tgz#60f2cfc7addd99a865c6c8cfbbcec76297386067"
   integrity sha512-74Ge7iqTDom0NX+mux8KbRUeJgu1eHZ3iv6utv++sLJG80FVuU9HnHeKVPfjd9s3woFhaFoQGf3B3iH/FrQmgw==
   dependencies:
     "@ethersproject/abi" "^5.6.0"
@@ -367,32 +367,7 @@
   dependencies:
     "@ethersproject/logger" "^5.6.0"
 
-"@ethersproject/providers@5.6.1":
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.6.1.tgz#9a05f00ecbac59565bf6907c8d2af8ac33303b48"
-  integrity sha512-w8Wx15nH+aVDvnoKCyI1f3x0B5idmk/bDJXMEUqCfdO8Eadd0QpDx9lDMTMmenhOmf9vufLJXjpSm24D3ZnVpg==
-  dependencies:
-    "@ethersproject/abstract-provider" "^5.6.0"
-    "@ethersproject/abstract-signer" "^5.6.0"
-    "@ethersproject/address" "^5.6.0"
-    "@ethersproject/basex" "^5.6.0"
-    "@ethersproject/bignumber" "^5.6.0"
-    "@ethersproject/bytes" "^5.6.0"
-    "@ethersproject/constants" "^5.6.0"
-    "@ethersproject/hash" "^5.6.0"
-    "@ethersproject/logger" "^5.6.0"
-    "@ethersproject/networks" "^5.6.0"
-    "@ethersproject/properties" "^5.6.0"
-    "@ethersproject/random" "^5.6.0"
-    "@ethersproject/rlp" "^5.6.0"
-    "@ethersproject/sha2" "^5.6.0"
-    "@ethersproject/strings" "^5.6.0"
-    "@ethersproject/transactions" "^5.6.0"
-    "@ethersproject/web" "^5.6.0"
-    bech32 "1.1.4"
-    ws "7.4.6"
-
-"@ethersproject/providers@5.6.2", "@ethersproject/providers@^5.5.1":
+"@ethersproject/providers@5.6.2", "@ethersproject/providers@^5.5.1", "@ethersproject/providers@^5.6.1":
   version "5.6.2"
   resolved "https://registry.npmjs.org/@ethersproject/providers/-/providers-5.6.2.tgz"
   integrity sha512-6/EaFW/hNWz+224FXwl8+HdMRzVHt8DpPmu5MZaIQqx/K/ELnC9eY236SMV7mleCM3NnEArFwcAAxH5kUUgaRg==
@@ -490,9 +465,9 @@
     "@ethersproject/rlp" "^5.6.0"
     "@ethersproject/signing-key" "^5.6.0"
 
-"@ethersproject/units@5.6.0":
+"@ethersproject/units@5.6.0", "@ethersproject/units@^5.6.0":
   version "5.6.0"
-  resolved "https://registry.npmjs.org/@ethersproject/units/-/units-5.6.0.tgz"
+  resolved "https://registry.npmjs.org/@ethersproject/units/-/units-5.6.0.tgz#e5cbb1906988f5740254a21b9ded6bd51e826d9c"
   integrity sha512-tig9x0Qmh8qbo1w8/6tmtyrm/QQRviBh389EQ+d8fP4wDsBrJBf08oZfoiz1/uenKK9M78yAP4PoR7SsVoTjsw==
   dependencies:
     "@ethersproject/bignumber" "^5.6.0"
@@ -738,29 +713,28 @@
   resolved "https://registry.npmjs.org/@thirdweb-dev/contracts/-/contracts-2.1.7.tgz"
   integrity sha512-QR4LtpopyCSdIhH4rdmXCrbeli0VaZ/hvkysetZqLRBAsuDjchqIS17vkAWwKQ903sK73RnZuEVQ4HAFkxzfqg==
 
-"@thirdweb-dev/react@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/@thirdweb-dev/react/-/react-2.0.3.tgz"
-  integrity sha512-qbCnJEeUfD0I/hAKtaW5+fuGa69fVkm38/juwbYJKsdGLtZnudWNySJfnVoQ+EiXFNeN4cVeM7LDcBaNYJ76EA==
+"@thirdweb-dev/react@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/react/-/react-2.0.4.tgz#9041717cd348e567fa83ef3fb3720a43034e0bb0"
+  integrity sha512-cDgum5HdJZJVvctGhuqOz1b+m2iCOVL8yMYsj8vFH89j/onSqMYsWTc1D96Gv3ErSw7hrFxasJbNklxfDciu4g==
   dependencies:
     mime "^3.0.0"
     react-cool-dimensions "^2.0.7"
-    react-icons "^4.3.1"
     swr "^1.2.2"
     tiny-invariant "^1.2.0"
-    wagmi "0.2.21"
+    wagmi "0.2.24"
 
-"@thirdweb-dev/sdk@^2.0.24":
-  version "2.0.24"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/sdk/-/sdk-2.0.24.tgz#61b48fea85046fe68b78f2d097c674ec41fd79e1"
-  integrity sha512-i1QBismn5v5kuYgYGiV3G7Q+qV5tW+fHN9FqfMnm7CVzlhmcstv39KuvbBQ244A5iD5XUPnz5fJfrN5w6Tlsjg==
+"@thirdweb-dev/sdk@^2.0.25":
+  version "2.0.25"
+  resolved "https://registry.npmjs.org/@thirdweb-dev/sdk/-/sdk-2.0.25.tgz#3234c06afd2f47873c9bfd2ae5528efbe02a5afc"
+  integrity sha512-HTRHWv2VsStUc6bo5pE+xPotBS0U7r0ZDLeiODT/1w0rc+6qIryhxdry76iUMNrrUjRch5LN/y5q0RQv3l0mGQ==
   dependencies:
-    "@ethersproject/bignumber" "5.6.0"
-    "@ethersproject/bytes" "5.6.1"
-    "@ethersproject/constants" "5.6.0"
-    "@ethersproject/contracts" "5.6.0"
-    "@ethersproject/providers" "5.6.1"
-    "@ethersproject/units" "5.6.0"
+    "@ethersproject/bignumber" "^5.6.0"
+    "@ethersproject/bytes" "^5.6.1"
+    "@ethersproject/constants" "^5.6.0"
+    "@ethersproject/contracts" "^5.6.0"
+    "@ethersproject/providers" "^5.6.1"
+    "@ethersproject/units" "^5.6.0"
     "@thirdweb-dev/contracts" "2.1.7"
     "@web-std/file" "^3.0.0"
     cross-fetch "^3.1.5"
@@ -2955,10 +2929,10 @@ prettier-plugin-tailwindcss@^0.1.8:
   resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.8.tgz#ba0f606ed91959ede670303d905b99106e9e6293"
   integrity sha512-hwarSBCswAXa+kqYtaAkFr3Vop9o04WOyZs0qo3NyvW8L7f1rif61wRyq0+ArmVThOuRBcJF5hjGXYk86cwemg==
 
-prettier@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.1.tgz#d472797e0d7461605c1609808e27b80c0f9cfe17"
-  integrity sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==
+prettier@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
+  integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -3029,11 +3003,6 @@ react-dom@^18.0.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.21.0"
-
-react-icons@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.3.1.tgz"
-  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
 react@^18.0.0:
   version "18.0.0"
@@ -3519,22 +3488,22 @@ uuid@^8.3.2:
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-wagmi-core@0.1.15:
-  version "0.1.15"
-  resolved "https://registry.npmjs.org/wagmi-core/-/wagmi-core-0.1.15.tgz"
-  integrity sha512-DbweN9mW87uGEMHWSbsCUqeJCzfM2PkJIKASuGPNpLyBhKxy2tWEQU6fSKhFl81rAo7xSg660kbDh6s+MzWJpA==
+wagmi-core@0.1.18:
+  version "0.1.18"
+  resolved "https://registry.npmjs.org/wagmi-core/-/wagmi-core-0.1.18.tgz#c1835a1fb18f471ee9e8e427f515e74452b52eeb"
+  integrity sha512-83hFh9YbIBYxStzbUdpahQbwvXUAeMJl5ChUNX9QpqjyDjJt0HbGKQ39FWHGre168Pcm4fYh6Ud99PN+x44gDw==
   dependencies:
     "@ethersproject/providers" "^5.5.1"
     eventemitter3 "^4.0.7"
 
-wagmi@0.2.21:
-  version "0.2.21"
-  resolved "https://registry.npmjs.org/wagmi/-/wagmi-0.2.21.tgz"
-  integrity sha512-POo41xE8D1C0jMCHmFbZ7L7kT7ReCmU6DqLzJefm0w7TqPh5Nz7LnbGOeW7DoM1f2gqf8ckA++8HxRdP6vHW0Q==
+wagmi@0.2.24:
+  version "0.2.24"
+  resolved "https://registry.npmjs.org/wagmi/-/wagmi-0.2.24.tgz#cb19bb64cce81a2d8a8367d724941cd23d1d0e7e"
+  integrity sha512-iTs37Fewu4vu4sGHWKsy36vkfT797/gsheY7b0ufcQdghoOMbDb06cBZfOuvlwgVSHgekt6cUU9x1q8Z3NUC+w==
   dependencies:
     "@ethersproject/providers" "^5.5.1"
     "@walletconnect/ethereum-provider" "1.7.5"
-    wagmi-core "0.1.15"
+    wagmi-core "0.1.18"
     walletlink "^2.5.0"
 
 walletlink@^2.5.0:
