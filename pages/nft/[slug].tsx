@@ -1,7 +1,15 @@
-import { useAddress, useDisconnect, useMetamask } from '@thirdweb-dev/react'
+import {
+  useAddress,
+  useDisconnect,
+  useMetamask,
+  useNFTDrop,
+} from '@thirdweb-dev/react'
+import { BigNumber } from 'ethers'
+
 import { CollectionAPI } from 'lib/api'
 import { GetServerSideProps, NextPageContext } from 'next'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { urlFor } from 'sanityClient'
 import { Collection } from 'tyings'
 
@@ -10,11 +18,12 @@ interface Props {
 }
 
 const NFTDropPage = ({ collection }: Props) => {
+  const [claimedSupply, setClaimedSupply] = useState<number>(0)
+  const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const nftDrop = useNFTDrop(collection?.address)
   const connectWithMetamask = useMetamask()
   const address: string | undefined = useAddress()
   const disconect = useDisconnect()
-
-  console.log(collection)
 
   const markAddress = () => {
     return (
@@ -23,6 +32,19 @@ const NFTDropPage = ({ collection }: Props) => {
       address?.substring(address?.length - 5)
     )
   }
+
+  useEffect(() => {
+    if (!nftDrop) return
+
+    const fetchNFTDropData = async () => {
+      const claimed = await nftDrop.getAllClaimed()
+      const total = await nftDrop.totalSupply()
+
+      setClaimedSupply(claimed.length)
+      setTotalSupply(total)
+    }
+    fetchNFTDropData()
+  }, [nftDrop])
 
   return (
     <div className="flex flex-col h-screen lg:grid lg:grid-cols-10">
@@ -81,7 +103,9 @@ const NFTDropPage = ({ collection }: Props) => {
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
             {collection.title}
           </h1>
-          <p className="pt-2 text-xl text-green-500"> 13/21 NFT's claimed</p>
+          <p className="pt-2 text-xl text-green-500">
+            {`${claimedSupply} / ${totalSupply?.toString()} NFT's claimed`}
+          </p>
         </div>
 
         {/* Mint button */}
