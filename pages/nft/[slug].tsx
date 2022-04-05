@@ -23,6 +23,7 @@ const NFTDropPage = ({ collection }: Props) => {
   const nftDrop = useNFTDrop(collection?.address)
   const connectWithMetamask = useMetamask()
   const address: string | undefined = useAddress()
+  const [loading, setLoading] = useState(true)
   const disconect = useDisconnect()
 
   const markAddress = () => {
@@ -37,11 +38,14 @@ const NFTDropPage = ({ collection }: Props) => {
     if (!nftDrop) return
 
     const fetchNFTDropData = async () => {
+      setLoading(true)
       const claimed = await nftDrop.getAllClaimed()
       const total = await nftDrop.totalSupply()
 
       setClaimedSupply(claimed.length)
       setTotalSupply(total)
+
+      setLoading(false)
     }
     fetchNFTDropData()
   }, [nftDrop])
@@ -97,17 +101,51 @@ const NFTDropPage = ({ collection }: Props) => {
         <div className="flex flex-col items-center flex-1 mt-10 space-y-6 text-center lg:justify-center lg:space-y-0">
           <img
             src={urlFor(collection.mainImage).url()}
-            className="object-cover pb-10 w-80 lg:h-40"
+            className="object-cover pb-10 lg:h-50 w-80"
             alt=""
           />
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
             {collection.title}
           </h1>
-          <p className="pt-2 text-xl text-green-500">
-            {`${claimedSupply} / ${totalSupply?.toString()} NFT's claimed`}
-          </p>
-        </div>
+          {loading ? (
+            <p className="pt-2 text-xl text-green-500 animate-pulse">
+              Loading Supply ...
+            </p>
+          ) : (
+            <p className="pt-2 text-xl text-green-500">
+              {`${claimedSupply} / ${totalSupply?.toString()} NFT's claimed`}
+            </p>
+          )}
 
+          {loading && (
+            <div className='inline-flex gap-4'>
+              <div
+                className="inline-block w-8 h-8 text-purple-500 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+              <div
+                className="inline-block w-8 h-8 text-green-500 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+              <div
+                className="inline-block w-8 h-8 text-red-500 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+              <div
+                className="inline-block w-8 h-8 text-yellow-500 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+              <div
+                className="inline-block w-8 h-8 text-blue-300 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+              <div
+                className="inline-block w-8 h-8 text-gray-300 bg-current rounded-full opacity-1 animate-pulse"
+                role="status"
+              />
+            </div>
+          )}
+        </div>
         {/* Mint button */}
         <button className="w-full h-16 mt-10 font-bold text-white transition-colors duration-500 bg-red-500 rounded-full shadow-md hover:bg-red-400">
           Mint NFT (0.01 ETH)

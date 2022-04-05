@@ -59,7 +59,6 @@ const Home = ({ collections }: Props) => {
         </div>
       </div>
 
-      {/* className="flex-1 text-5xl font-extrabold text-transparent bg-gradient-to-br from-pink-400 to-purple-600 bg-clip-text" */}
     </div>
   )
 }
