@@ -20,10 +20,12 @@ interface Props {
 const NFTDropPage = ({ collection }: Props) => {
   const [claimedSupply, setClaimedSupply] = useState<number>(0)
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const [loading, setLoading] = useState(true)
+  const [ethPrice, setEthPrice] = useState<string>()
+
+  const address: string | undefined = useAddress()
   const nftDrop = useNFTDrop(collection?.address)
   const connectWithMetamask = useMetamask()
-  const address: string | undefined = useAddress()
-  const [loading, setLoading] = useState(true)
   const disconect = useDisconnect()
 
   const markAddress = () => {
@@ -33,6 +35,17 @@ const NFTDropPage = ({ collection }: Props) => {
       address?.substring(address?.length - 5)
     )
   }
+
+  useEffect(() => {
+    if (!nftDrop) return
+
+    const fetchPrice = async () => {
+      const claimConditions = await nftDrop.claimConditions.getAll()
+      setEthPrice(claimConditions?.[0]?.currencyMetadata.displayValue)
+    }
+
+    fetchPrice()
+  }, [nftDrop])
 
   useEffect(() => {
     if (!nftDrop) return
@@ -47,8 +60,33 @@ const NFTDropPage = ({ collection }: Props) => {
 
       setLoading(false)
     }
+
     fetchNFTDropData()
   }, [nftDrop])
+
+  const renderMintButton = () => {
+    const isBtnDisabled =
+      loading || claimedSupply === totalSupply?.toNumber() || !address
+
+    // const clickHandler =
+    let btnText = `Min NFT (${ethPrice} ETH)`
+    if (loading) {
+      btnText = 'Loading'
+    } else if (claimedSupply === totalSupply?.toNumber()) {
+      btnText = 'SOLD OUT'
+    } else if (!address) {
+      btnText = 'Connect wallet to Mint'
+    }
+
+    return (
+      <button
+        className="w-full h-16 mt-10 font-bold text-white transition-colors duration-500 bg-red-500 rounded-full shadow-md hover:bg-red-400 disabled:bg-gray-300"
+        disabled={isBtnDisabled}
+      >
+        {btnText}
+      </button>
+    )
+  }
 
   return (
     <div className="flex flex-col h-screen lg:grid lg:grid-cols-10">
@@ -118,38 +156,29 @@ const NFTDropPage = ({ collection }: Props) => {
           )}
 
           {loading && (
-            <div className='inline-flex gap-4'>
-              <div
-                className="inline-block w-8 h-8 text-purple-500 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
-              <div
-                className="inline-block w-8 h-8 text-green-500 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
-              <div
-                className="inline-block w-8 h-8 text-red-500 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
-              <div
-                className="inline-block w-8 h-8 text-yellow-500 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
-              <div
-                className="inline-block w-8 h-8 text-blue-300 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
-              <div
-                className="inline-block w-8 h-8 text-gray-300 bg-current rounded-full opacity-1 animate-pulse"
-                role="status"
-              />
+            <div className="inline-flex gap-4 lg:p-10">
+              {[
+                'text-purple-500 ',
+                'text-green-500',
+                'text-red-500',
+                'text-yellow-500',
+                'text-blue-300',
+                'text-gray-300',
+              ].map((color, index) => (
+                <div
+                  className={`opacity-1 inline-block h-8 w-8 animate-pulse animate-bounce rounded-full bg-current ${color} border`}
+                  style={{ animationDelay: `${index * 150}ms` }}
+                  key={color}
+                  role="status"
+                >
+                  {index}
+                </div>
+              ))}
             </div>
           )}
         </div>
         {/* Mint button */}
-        <button className="w-full h-16 mt-10 font-bold text-white transition-colors duration-500 bg-red-500 rounded-full shadow-md hover:bg-red-400">
-          Mint NFT (0.01 ETH)
-        </button>
+        {renderMintButton()}
       </div>
     </div>
   )
