@@ -4,12 +4,14 @@ import {
   useMetamask,
   useNFTDrop,
 } from '@thirdweb-dev/react'
+import { NFTMetadataOwner, TransactionResultWithId } from '@thirdweb-dev/sdk'
 import { BigNumber } from 'ethers'
 
 import { CollectionAPI } from 'lib/api'
 import { GetServerSideProps, NextPageContext } from 'next'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { urlFor } from 'sanityClient'
 import { Collection } from 'tyings'
 
@@ -47,26 +49,93 @@ const NFTDropPage = ({ collection }: Props) => {
     fetchPrice()
   }, [nftDrop])
 
-  useEffect(() => {
-    if (!nftDrop) return
-
-    const fetchNFTDropData = async () => {
-      setLoading(true)
-      const claimed = await nftDrop.getAllClaimed()
-      const total = await nftDrop.totalSupply()
-
+  const fetchNFTDropData = async () => {
+    setLoading(true)
+    const claimed = await nftDrop?.getAllClaimed()
+    const total = await nftDrop?.totalSupply()
+    if (claimed) {
       setClaimedSupply(claimed.length)
       setTotalSupply(total)
-
-      setLoading(false)
     }
 
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    if (!nftDrop) return
     fetchNFTDropData()
   }, [nftDrop])
+
+  const minNFT = async () => {
+    const notification = toast.loading('Minting NFT...', {
+      style: {
+        background: '#0e0e0e',
+        color: 'green',
+        fontWeight: 'bolder',
+        fontSize: '17px',
+        padding: '20px',
+      },
+    })
+    try {
+      setLoading(true)
+      if (!nftDrop || !address) return
+
+      const quantity = 1
+
+      const tx: TransactionResultWithId<NFTMetadataOwner>[] =
+        await nftDrop.claimTo(address, quantity)
+
+      const { receipt, id, data } = tx[0]
+      toast.dismiss(notification)
+      toast(
+        (t) => (
+          <div className="flex flex-col">
+            <p>You successfully Minted!</p>
+            <Link
+              passHref
+              href={`https://rinkeby.etherscan.io/tx/${receipt.transactionHash}`}
+            >
+              <a className="text-sm text-gray-200 hover:underline">
+                View on Etherscan {receipt.transactionHash.substring(0, 12)} ...
+              </a>
+            </Link>
+          </div>
+        ),
+        {
+          duration: 10000,
+          style: {
+            background: 'green',
+            color: 'white',
+            fontWeight: 'bolder',
+            fontSize: '17px',
+            padding: '20px',
+          },
+        }
+      )
+    } catch (err) {
+      toast.dismiss(notification)
+
+      toast.error('Unable to process.', {
+        style: {
+          background: 'red',
+          color: 'white',
+          fontWeight: 'bolder',
+          fontSize: '17px',
+          padding: '17px',
+        },
+      })
+    } finally {
+      setLoading(false)
+      await fetchNFTDropData()
+      toast.dismiss(notification)
+    }
+  }
 
   const renderMintButton = () => {
     const isBtnDisabled =
       loading || claimedSupply === totalSupply?.toNumber() || !address
+
+    let clickAction = minNFT
 
     // const clickHandler =
     let btnText = `Min NFT (${ethPrice} ETH)`
@@ -82,6 +151,7 @@ const NFTDropPage = ({ collection }: Props) => {
       <button
         className="w-full h-16 mt-10 font-bold text-white transition-colors duration-500 bg-red-500 rounded-full shadow-md hover:bg-red-400 disabled:bg-gray-300"
         disabled={isBtnDisabled}
+        onClick={clickAction}
       >
         {btnText}
       </button>

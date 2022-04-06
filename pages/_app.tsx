@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import ProgressBar from '@badrap/bar-of-progress'
 import Router from 'next/router'
+import { Toaster } from 'react-hot-toast'
 
 const progress = new ProgressBar({
   size: 10,
@@ -18,6 +19,7 @@ Router.events.on('routeChangeError', progress.finish)
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider desiredChainId={ChainId.Rinkeby}>
+      <Toaster />
       <Component {...pageProps} />
     </ThirdwebProvider>
   )
